@@ -1,0 +1,32 @@
+services:
+  _defaults:
+    autowire: false
+    autoconfigure: false
+
+  discounter.infrastructure.cli.import_customers:
+    class: Discounter\Infrastructure\Cli\ImportCustomerCommand
+    arguments:
+      - '@messenger.bus.default'
+      - '%kernel.project_dir%'
+    tags: ['console.command']
+
+  discounter.infrastructure.cli.import_categories:
+    class: Discounter\Infrastructure\Cli\ImportCategoryCommand
+    arguments:
+      - '@messenger.bus.default'
+      - '%kernel.project_dir%'
+    tags: ['console.command']
+
+  discounter.infrastructure.cli.import_products:
+    class: Discounter\Infrastructure\Cli\ImportProductCommand
+    arguments:
+      - '@messenger.bus.default'
+      - '%kernel.project_dir%'
+    tags: ['console.command']
+
+  discounter.infrastructure.cli.discount_order:
+    class: Discounter\Infrastructure\Cli\DiscountOrderCommand
+    arguments:
+      - '@discounter.application.discounts.apply_discounts'
+      - '%kernel.project_dir%'
+    tags: ['console.command']

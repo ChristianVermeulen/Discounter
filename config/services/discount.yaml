@@ -1,0 +1,26 @@
+services:
+  _defaults:
+    autowire: false
+    autoconfigure: false
+
+  discounter.application.discounts.loyalty_discount:
+    class: Discounter\Application\Discounts\LoyaltyDiscount
+    arguments:
+      - '@discounter.infrastructure.repository.customer.dbal'
+
+  discounter.application.discounts.switches_discount:
+    class: Discounter\Application\Discounts\SwitchesDiscount
+    arguments:
+      - '@discounter.infrastructure.repository.product.dbal'
+
+  discounter.application.discounts.tools_discount:
+    class: Discounter\Application\Discounts\ToolsDiscount
+    arguments:
+      - '@discounter.infrastructure.repository.product.dbal'
+
+  discounter.application.discounts.apply_discounts:
+    class: Discounter\Application\Discounts\ApplyDiscounts
+    arguments:
+      - '@discounter.application.discounts.loyalty_discount'
+      - '@discounter.application.discounts.switches_discount'
+      - '@discounter.application.discounts.tools_discount'

@@ -1,0 +1,22 @@
+services:
+  _defaults:
+    autowire: false
+    autoconfigure: false
+
+  discounter.application.command.customer.import:
+    class: Discounter\Application\Command\Customer\ImportHandler
+    arguments:
+      - '@discounter.infrastructure.repository.customer.dbal'
+    tags: ['messenger.message_handler']
+
+  discounter.application.command.category.create:
+    class: Discounter\Application\Command\Category\CreateHandler
+    arguments:
+      - '@discounter.infrastructure.repository.category.dbal'
+    tags: ['messenger.message_handler']
+
+  discounter.application.command.product.create:
+    class: Discounter\Application\Command\Product\CreateHandler
+    arguments:
+      - '@discounter.infrastructure.repository.product.dbal'
+    tags: ['messenger.message_handler']
